@@ -85,7 +85,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .route-label{font-size:11px;color:var(--text2)}
 .route-name{font-size:13px;font-weight:600;color:var(--text)}
 
-.signals-section{flex:1;overflow-y:auto;padding:0}
+.signals-section{flex:1;min-height:0;overflow-y:auto;padding:0}
 .signals-section::-webkit-scrollbar{width:4px}
 .signals-section::-webkit-scrollbar-track{background:transparent}
 .signals-section::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
@@ -734,8 +734,10 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     </div>
   </div>
 
-  <div class="sig-hdr" id="sigHdr">TRAFFIC SIGNALS ON ROUTE (8)</div>
-  <div class="signals-section" id="signalList"></div>
+  <div class="signals-section" id="signalList">
+    <div class="sig-hdr" id="sigHdr">TRAFFIC SIGNALS ON ROUTE (8)</div>
+    <div id="signalItems"></div>
+  </div>
 
   <div class="voice-panel">
     <div class="voice-hdr">
@@ -1173,7 +1175,6 @@ function crossTimerHTML(sigId) {
 }
 
 function renderSignalList() {
-  const container = document.getElementById('signalList');
   const stateInfo = {
     normal:   { cls:'',            badge:'sb-normal', label:'NORMAL',   icon:'',        emoji:'⚫' },
     warning:  { cls:'warn-sig',    badge:'sb-amber',  label:'WARNING',  icon:'si-amber',emoji:'🟡' },
@@ -1182,7 +1183,7 @@ function renderSignalList() {
     recovery: { cls:'recovery-sig',badge:'sb-blue',   label:'RECOVERY', icon:'si-blue', emoji:'🔵' },
   };
   document.getElementById('sigHdr').textContent = `TRAFFIC SIGNALS ON ROUTE (${activeSignals.length})`;
-  container.innerHTML = activeSignals.map((sig, i) => {
+  document.getElementById('signalItems').innerHTML = activeSignals.map((sig, i) => {
     const st = stateInfo[sig.state] || stateInfo.normal;
     const dist = isRunning
       ? Math.max(0, Math.round((i / activeSignals.length - ambProgress) * userRouteTotalDist * 1000))
