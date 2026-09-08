@@ -2,6 +2,10 @@
 
 **GreenCorridor** is a real-time emergency ambulance navigation and traffic signal preemption system. It simulates how an ambulance dispatched from any location can have all traffic signals on its route turned green automatically, minimizing delays and saving lives.
 
+##  Live Demo
+ [**Launch Dynamic Green Corridor**] : ( https://greencorridor.vercel.app )
+
+ 
 ## Core Features
 - **Intelligent Route Selection:** Fetches optimal driving paths using OSRM and lets the user or system select the most direct route.
 - **3-Ring Signal Preemption:** A dynamic geofence system (2 km, 1 km, 500 m rings) triggers green lights well ahead of the ambulance's arrival.
